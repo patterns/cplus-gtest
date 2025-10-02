@@ -32,3 +32,4 @@ TEST(HousingTest, 20year_sophomore_disciplined) {
    EXPECT_EQ(h.Points(), 2+0+0-0-0-3);
 }
 
+
