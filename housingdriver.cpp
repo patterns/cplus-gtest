@@ -2,6 +2,7 @@
 // main program to exercise the housing points object
 
 #include <iostream>
+
 #include "housing.h"
 
 // Sanity check for yes/no user input.
@@ -26,7 +27,7 @@ int ReadYN(std::string prompt) {
    int yn = INPUT_INVALID;
    std::string input;
 
-   for (int retry=MAX_RETRY ; retry>0 && yn == INPUT_INVALID ; retry--) {
+   for (int retry = MAX_RETRY; retry > 0 && yn == INPUT_INVALID; retry--) {
       std::cout << prompt << std::endl;
       std::cin >> input;
 
@@ -53,7 +54,7 @@ int KnownNum(std::string input) {
       // conversion can cause 2 exceptions
       // (we already restricted values at 3 digits)
       num = std::stoi(input);
-   } catch(const std::invalid_argument& e) {
+   } catch (const std::invalid_argument& e) {
       num = INPUT_INVALID;
    }
 
@@ -70,7 +71,7 @@ int ReadNum(std::string prompt) {
    int yn = INPUT_INVALID;
    std::string input;
 
-   for (int retry=MAX_RETRY ; retry>0 && yn == INPUT_INVALID ; retry--) {
+   for (int retry = MAX_RETRY; retry > 0 && yn == INPUT_INVALID; retry--) {
       std::cout << prompt << std::endl;
       std::cin >> input;
 
@@ -89,7 +90,7 @@ int ReadClass(Housing h) {
    int classyr = INPUT_INVALID;
    std::string input;
 
-   for (int retry=MAX_RETRY ; retry>0 && classyr == INPUT_INVALID ; retry--) {
+   for (int retry = MAX_RETRY; retry > 0 && classyr == INPUT_INVALID; retry--) {
       std::cout << "What class year are you? (Fr, So, Jr, Sr)" << std::endl;
       std::cin >> input;
 
@@ -168,14 +169,9 @@ int main() {
    }
 
    std::cout << "You have " << housing.Points() << " housing points." << std::endl;
-   std::cout << "(" << housing.ClassYearVal() << " + "
-             << housing.AgeVal() << " + "
-             << housing.FullTimeVal() << " + "
-             << housing.ProbationVal() << " + "
-             << housing.SuspendedVal() << " + "
-             << housing.DisciplinedVal() 
-             << ")" << std::endl;
+   std::cout << "(" << housing.ClassYearVal() << " + " << housing.AgeVal() << " + "
+             << housing.FullTimeVal() << " + " << housing.ProbationVal() << " + "
+             << housing.SuspendedVal() << " + " << housing.DisciplinedVal() << ")" << std::endl;
 
    return 0;
 }
-

@@ -1,13 +1,14 @@
 // housing.cpp; Hsin-ih Tu; 2025.10.01;
-// a Housing Lottery object 
-// 
+// a Housing Lottery object
+//
 
-#include <algorithm>
 #include "housing.h"
 
+#include <algorithm>
+
 //----------------------------------------------------------------------------
-// Housing Lottery constructor 
-// 
+// Housing Lottery constructor
+//
 
 Housing::Housing() {
    year_ = 0;
@@ -19,7 +20,8 @@ Housing::Housing() {
 }
 
 int Housing::Points() {
-   return ClassYearVal() + AgeVal() + FullTimeVal() + ProbationVal() + SuspendedVal() + DisciplinedVal();
+   return ClassYearVal() + AgeVal() + FullTimeVal() + ProbationVal() + SuspendedVal() +
+          DisciplinedVal();
 }
 
 // Check that input is a member of the Class Year list.
@@ -33,9 +35,9 @@ int Housing::KnownClassYear(std::string input) {
 
    std::transform(allcaps.begin(), allcaps.end(), allcaps.begin(), ::toupper);
 
-   for (int n=0 ; n<MAX_CLASSYR ; n++) {
+   for (int n = 0; n < MAX_CLASSYR; n++) {
       if (allcaps.compare(0, 2, CLASS_YEAR[n], 2) == 0) {
-         return n+1;
+         return n + 1;
       }
    }
 
@@ -49,7 +51,7 @@ void Housing::ClassYear(std::string input) {
    std::string allcaps = input;
    std::transform(allcaps.begin(), allcaps.end(), allcaps.begin(), ::toupper);
 
-   for (int n=0 ; n<MAX_CLASSYR ; n++) {
+   for (int n = 0; n < MAX_CLASSYR; n++) {
       if (allcaps.compare(0, 2, CLASS_YEAR[n], 2) == 0) {
          year_ = n + 1;
          break;
@@ -58,14 +60,12 @@ void Housing::ClassYear(std::string input) {
 }
 
 void Housing::ClassYear(int val) {
-    // if val <1 or >MAX_CLASSYR , uh-oh...
-    year_ = val;
+   // if val <1 or >MAX_CLASSYR , uh-oh...
+   year_ = val;
 }
 
 // getter for class year member field.
-int Housing::ClassYearVal() {
-   return year_;
-}
+int Housing::ClassYearVal() { return year_; }
 
 // setter for 23plus
 void Housing::Age(int yesno) {
@@ -75,19 +75,17 @@ void Housing::Age(int yesno) {
    } else {
       age_ = yesno;
    }
-/*******
-   ////if yesno == INPUT_INVALID , uh oh....
-   if (yesno == INPUT_YES) {
-      age_ = 0;
-   } else {
-      age_ = 1;
-   }******/
+   /*******
+      ////if yesno == INPUT_INVALID , uh oh....
+      if (yesno == INPUT_YES) {
+         age_ = 0;
+      } else {
+         age_ = 1;
+      }******/
 }
 
 // getter for age (calculated val).
-int Housing::AgeVal() {
-   return std::max(0, (age_ - 23)/2);
-}
+int Housing::AgeVal() { return std::max(0, (age_ - 23) / 2); }
 
 // setter for full-time
 void Housing::FullTime(int yesno) {
@@ -100,9 +98,7 @@ void Housing::FullTime(int yesno) {
 }
 
 // getter for full-time.
-int Housing::FullTimeVal() {
-   return fulltime_;
-}
+int Housing::FullTimeVal() { return fulltime_; }
 
 // setter for probation
 void Housing::Probation(int yesno) {
@@ -115,9 +111,7 @@ void Housing::Probation(int yesno) {
 }
 
 // getter for probation.
-int Housing::ProbationVal() {
-   return probation_;
-}
+int Housing::ProbationVal() { return probation_; }
 
 // setter for suspended
 void Housing::Suspended(int yesno) {
@@ -130,9 +124,7 @@ void Housing::Suspended(int yesno) {
 }
 
 // getter for suspended.
-int Housing::SuspendedVal() {
-   return suspended_;
-}
+int Housing::SuspendedVal() { return suspended_; }
 
 // setter for disciplined
 void Housing::Disciplined(int yesno) {
@@ -145,7 +137,4 @@ void Housing::Disciplined(int yesno) {
 }
 
 // getter for disciplined.
-int Housing::DisciplinedVal() {
-   return disciplined_;
-}
-
+int Housing::DisciplinedVal() { return disciplined_; }
