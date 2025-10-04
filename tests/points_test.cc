@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "housing.h"
 
 TEST(HousingTest, 55year_senior) {
@@ -8,8 +9,8 @@ TEST(HousingTest, 55year_senior) {
    h.ClassYear(CLASS_SENIOR);
    h.Age(55);
 
-   int agePt = std::max(0,(55-23)/2); 
-   EXPECT_EQ(h.Points(), 4+ agePt +0-0-0-0);
+   int agePt = std::max(0, (55 - 23) / 2);
+   EXPECT_EQ(h.Points(), 4 + agePt + 0 - 0 - 0 - 0);
 }
 
 TEST(HousingTest, 10year_freshman) {
@@ -19,17 +20,17 @@ TEST(HousingTest, 10year_freshman) {
    h.ClassYear(CLASS_FRESHMAN);
    h.Age(10);
 
-   EXPECT_EQ(h.Points(), 1+0+0-0-0-0);
+   EXPECT_EQ(h.Points(), 1 + 0 + 0 - 0 - 0 - 0);
 }
 
 TEST(HousingTest, 23year_sophomore) {
    Housing h = Housing();
 
-   // a 23 year old sophomore 
+   // a 23 year old sophomore
    h.ClassYear(CLASS_SOPHOMORE);
    h.Age(23);
 
-   EXPECT_EQ(h.Points(), 2+0+0-0-0-0);
+   EXPECT_EQ(h.Points(), 2 + 0 + 0 - 0 - 0 - 0);
 }
 
 TEST(HousingTest, 23year_junior_disciplined) {
@@ -40,7 +41,7 @@ TEST(HousingTest, 23year_junior_disciplined) {
    h.Age(23);
    h.Disciplined(INPUT_YES);
 
-   EXPECT_EQ(h.Points(), 3+0+0-0-0-3);
+   EXPECT_EQ(h.Points(), 3 + 0 + 0 - 0 - 0 - 3);
 }
 
 TEST(HousingTest, 23year_junior_suspended) {
@@ -51,7 +52,7 @@ TEST(HousingTest, 23year_junior_suspended) {
    h.Age(23);
    h.Suspended(INPUT_YES);
 
-   EXPECT_EQ(h.Points(), 3+0+0-0-2-0);
+   EXPECT_EQ(h.Points(), 3 + 0 + 0 - 0 - 2 - 0);
 }
 
 TEST(HousingTest, 23year_junior_probation) {
@@ -62,7 +63,7 @@ TEST(HousingTest, 23year_junior_probation) {
    h.Age(23);
    h.Probation(INPUT_YES);
 
-   EXPECT_EQ(h.Points(), 3+0+0-1-0-0);
+   EXPECT_EQ(h.Points(), 3 + 0 + 0 - 1 - 0 - 0);
 }
 
 TEST(HousingTest, 23year_junior_student_teacher) {
@@ -73,7 +74,7 @@ TEST(HousingTest, 23year_junior_student_teacher) {
    h.Age(23);
    h.FullTime(INPUT_YES);
 
-   EXPECT_EQ(h.Points(), 3+0+1-0-0-0);
+   EXPECT_EQ(h.Points(), 3 + 0 + 1 - 0 - 0 - 0);
 }
 
 TEST(HousingTest, 23year_junior_all) {
@@ -87,7 +88,5 @@ TEST(HousingTest, 23year_junior_all) {
    h.Suspended(INPUT_YES);
    h.Disciplined(INPUT_YES);
 
-   EXPECT_EQ(h.Points(), 3+0+1-1-2-3);
+   EXPECT_EQ(h.Points(), 3 + 0 + 1 - 1 - 2 - 3);
 }
-
-
