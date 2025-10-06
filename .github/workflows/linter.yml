@@ -10,3 +10,6 @@ jobs:
       with:
         clang-format-version: '20'
         check-path: '.'
+
+    - name: Run clang-tidy
+      uses: HorstBaerbel/action-clang-tidy@1.2
