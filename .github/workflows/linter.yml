@@ -11,5 +11,11 @@ jobs:
         clang-format-version: '20'
         check-path: '.'
 
-    - name: Run clang-tidy
-      uses: HorstBaerbel/action-clang-tidy@1.2
+    - name: install clang-tidy
+      run: sudo apt install -y clang-tidy
+    - name: gen makefile
+      run: cmake -S. -Bbuild
+    - name: build proj to gen compile_commands.json
+      run: cmake --build build
+    - name: run clang-tidy
+      run: clang-tidy -p build ./housing.cpp
