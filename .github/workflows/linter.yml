@@ -1,21 +1,20 @@
 name: Check coding style
 on: [push, pull_request]
 jobs:
-  linter:
+  clangtools:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: jidicula/clang-format-action@v4.15.0
+    - uses: actions/checkout@v5
+    - uses: cpp-linter/cpp-linter-action@v2
+      id: linter
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        clang-format-version: '20'
-        check-path: '.'
-
-    - name: install clang-tidy
-      run: sudo apt install -y clang-tidy
-    - name: gen makefile
-      run: cmake -S. -Bbuild
-    - name: build proj to gen compile_commands.json
-      run: cmake --build build
-    - name: run clang-tidy
-      run: clang-tidy -p build ./housing.cpp
+          style: 'file'  # Use .clang-format config file
+          tidy-checks: '' # Use .clang-tidy config file
+          # only 'update' a single comment in a pull request thread.
+          thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
+    - name: Fail fast?!
+      if: steps.linter.outputs.checks-failed > 0
+      run: exit 1
