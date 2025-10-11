@@ -16,20 +16,17 @@ jobs:
   build:
     runs-on: ${{ matrix.runs-on }}
     container:
-      image: rockylinux/rockylinux:10
+      image: rockylinux/rockylinux:9.6
       options: --privileged
     strategy:
       fail-fast: false
       matrix:
-        arch: [x86_64]
-        dist: [el10, el9]
+        arch: [x86_64, aarch64]
         include:
-          - dist: el9
-            target: rocky+epel-9
-          - dist: el10
-            target: rocky+epel-10
           - arch: x86_64
             runs-on: ubuntu-24.04
+          - arch: aarch64
+            runs-on: ubuntu-24.04-arm
 
     steps:
     - uses: actions/checkout@v5
