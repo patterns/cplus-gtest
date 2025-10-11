@@ -2,18 +2,22 @@ name: Check coding style
 on: [push, pull_request]
 jobs:
   clangtools:
-
     runs-on: ubuntu-latest
+    container:
+      image: rockylinux/rockylinux:9.6
+      options: --privileged
+
     steps:
     - uses: actions/checkout@v5
-    - uses: cpp-linter/cpp-linter-action@v2
-      id: linter
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          style: 'file'  # Use .clang-format config file
-          tidy-checks: '' # Use .clang-tidy config file
-          step-summary: true
-    - name: Fail fast?!
-      if: steps.linter.outputs.checks-failed > 0
-      run: exit 1
+    - name: install cmake
+      run: |
+          dnf -y install cmake gcc-c++ clang-tools-extra
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+    - name: Linter
+      ####working-directory: ${{github.workspace}}/build
+      run: |
+          cd ${{github.workspace}}/build
+          make clang-tidy-check
